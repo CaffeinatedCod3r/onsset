@@ -32,8 +32,8 @@ def run_analysis(tmpdir):
 
     """
 
-    specs_path = os.path.join('test', 'test_data', 'dj-specs-test.xlsx')
-    csv_path = os.path.join('test', 'test_data', 'dj-test.csv')
+    specs_path = os.path.join('/content/onsset/test', 'test_data', 'dj-specs-test.xlsx')
+    csv_path = os.path.join('/content/onsset/test', 'test_data', 'dj-test.csv')
     calibrated_csv_path = os.path.join(tmpdir, 'dj-calibrated.csv')
     specs_path_calib = os.path.join(tmpdir, 'dj-specs-test-calib.xlsx')
 
@@ -42,13 +42,13 @@ def run_analysis(tmpdir):
     scenario(specs_path_calib, calibrated_csv_path, tmpdir, tmpdir)
 
     actual = os.path.join(tmpdir, 'dj-1-1_1_1_1_0_0_summary.csv')
-    expected = os.path.join('test', 'test_results', 'expected_summary.csv')
+    expected = os.path.join('/content/onsset/test', 'test_results', 'expected_summary.csv')
     summary = filecmp.cmp(actual, expected)
     if summary == False:
         print(actual)
 
     actual = os.path.join(tmpdir, 'dj-1-1_1_1_1_0_0.csv')
-    expected = os.path.join('test', 'test_results', 'expected_full.csv')
+    expected = os.path.join('/content/onsset/test', 'test_results', 'expected_full.csv')
     full = filecmp.cmp(actual, expected)
     return summary, full
 
@@ -73,16 +73,15 @@ def update_test_file():
     summary, actual = run_analysis(tmpdir)
 
     actual = os.path.join(tmpdir, 'dj-1-1_1_1_1_0_0_summary.csv')
-    expected = os.path.join('test', 'test_results', 'expected_summary.csv')
+    expected = os.path.join('/content/onsset/test', 'test_results', 'expected_summary.csv')
     if not summary:
         copyfile(actual, expected)
 
     actual = os.path.join(tmpdir, 'dj-1-1_1_1_1_0_0.csv')
-    expected = os.path.join('test', 'test_results', 'expected_full.csv')
+    expected = os.path.join('/content/onsset/test', 'test_results', 'expected_full.csv')
     if not actual:
         copyfile(actual, expected)
 
 
 if __name__ == '__main__':
-
     update_test_file()
