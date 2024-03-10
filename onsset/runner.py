@@ -98,7 +98,6 @@ def calibration(specs_path, csv_path, specs_path_calib, calibrated_csv_path):
     # RUN_PARAM: Here the calibrated "specs" data are copied to a new tab called "SpecsDataCalib". 
     # This is what will later on be used to feed the model
     specs_data.to_excel(writer, sheet_name='SpecsDataCalib', index=False)
-    writer.save()
     writer.close()
 
     logging.info('Calibration finished. Results are transferred to the csv file')
