@@ -89,7 +89,12 @@ def calibration(specs_path, csv_path, specs_path_calib, calibrated_csv_path):
 
     book = load_workbook(specs_path)
     writer = pd.ExcelWriter(specs_path_calib, engine='openpyxl')
-    writer.book = book
+    writer.workbook = book
+    specs_data1 = pd.read_excel(specs_path, sheet_name='ScenarioInfo')
+    specs_data1.to_excel(writer, sheet_name='ScenarioInfo', index=False)
+  
+    specs_data2 = pd.read_excel(specs_path, sheet_name='ScenarioParameters')
+    specs_data2.to_excel(writer, sheet_name='ScenarioParameters', index=False)
     # RUN_PARAM: Here the calibrated "specs" data are copied to a new tab called "SpecsDataCalib". 
     # This is what will later on be used to feed the model
     specs_data.to_excel(writer, sheet_name='SpecsDataCalib', index=False)
